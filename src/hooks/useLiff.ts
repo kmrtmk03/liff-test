@@ -20,7 +20,11 @@ export const useLiff = () => {
     profile: null,
   })
 
+  const [isInClient, setIsInClient] = useState(false)
+
   useEffect(() => {
+
+
     const initLiff = async () => {
       try {
         const liffId = import.meta.env.VITE_LIFF_ID
@@ -29,6 +33,9 @@ export const useLiff = () => {
         }
 
         await liff.init({ liffId })
+
+        setIsInClient(liff.isInClient())
+        console.log("isLoggedIn", liff.isLoggedIn())
 
         const loggedIn = liff.isLoggedIn()
 
@@ -71,5 +78,9 @@ export const useLiff = () => {
     liff.login({ redirectUri: window.location.origin + '/profile' })
   }
 
-  return { ...liffState, login }
+  return {
+    ...liffState,
+    login,
+    isInClient,
+  }
 }

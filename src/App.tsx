@@ -7,10 +7,15 @@ import { ProfilePage } from './components/ProfilePage'
 
 function App(): ReactElement {
   // profileをApp.tsxで一元管理
-  const { isInit, isLoggedIn, error, profile, login } = useLiff()
+  const { isInit, isLoggedIn, error, profile, login, isInClient } = useLiff()
 
   return (
     <main>
+      <p>isInClient: {isInClient.toString()}</p>
+      <p>isLoggedIn: {isLoggedIn.toString()}</p>
+      <p>isInit: {isInit.toString()}</p>
+      <p>error: {error}</p>
+      <p>profile: {JSON.stringify(profile)}</p>
       <Routes>
         <Route
           path="/"
