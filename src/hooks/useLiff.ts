@@ -60,6 +60,15 @@ export const useLiff = () => {
             })
           } catch (e) {
             console.error('Failed to get profile:', e)
+
+            // 未ログインの場合、初期化のみ完了
+            setLiffState({
+              isInit: true,
+              isLoggedIn: false,
+              error: null,
+              profile: null,
+              accessToken: null,
+            })
           }
         } else {
           // LINE内Webviewの場合、自動的にログイン処理を行う
