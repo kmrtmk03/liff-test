@@ -56,15 +56,17 @@ export const useLiff = () => {
                 userId: profile.userId,
               },
               accessToken,
-              // TODO: プロフィールページに遷移する処理
             })
+
+            // TODO: プロフィールページに遷移する処理
+
           } catch (e) {
 
             // 初期化
             setLiffState({
               isInit: true,
               isLoggedIn: false,
-              error: null,
+              error: e instanceof Error ? e.message : 'LIFF initialization failed',
               profile: null,
               accessToken: null,
             })
