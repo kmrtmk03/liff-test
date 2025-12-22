@@ -61,7 +61,14 @@ export const useLiff = () => {
           } catch (e) {
             console.error('Failed to get profile:', e)
 
-            // 未ログインの場合、初期化のみ完了
+            // LINE内Webviewの場合、トークンの問題が疑われるため再ログインを試みる
+            if (liff.isInClient()) {
+              console.warn('In client but failed to get profile, logging in again...')
+              liff.login()
+              return
+            }
+
+            // 外部ブラウザの場合は未ログインとして扱う
             setLiffState({
               isInit: true,
               isLoggedIn: false,
