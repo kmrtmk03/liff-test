@@ -6,9 +6,10 @@ interface ProfilePageProps {
   isLoggedIn: boolean
   error: string | null
   profile: LiffState['profile']
+  logout: () => void
 }
 
-export function ProfilePage({ isInit, isLoggedIn, error, profile }: ProfilePageProps): ReactElement {
+export function ProfilePage({ isInit, isLoggedIn, error, profile, logout }: ProfilePageProps): ReactElement {
   if (!isInit) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
   if (!isLoggedIn || !profile) return <p>ログインしていません</p>
@@ -19,6 +20,11 @@ export function ProfilePage({ isInit, isLoggedIn, error, profile }: ProfilePageP
       {profile.pictureUrl && (
         <img src={profile.pictureUrl} alt="プロフィール画像" className="profile-image" />
       )}
+      <div style={{ marginTop: '20px' }}>
+        <button onClick={logout} className="logout-button">
+          ログアウト
+        </button>
+      </div>
     </div>
   )
 }

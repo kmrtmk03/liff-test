@@ -7,7 +7,7 @@ import { ProfilePage } from './components/ProfilePage'
 
 function App(): ReactElement {
   // profileをApp.tsxで一元管理
-  const { isInit, isLoggedIn, error, profile, login, isInClient } = useLiff()
+  const { isInit, isLoggedIn, error, profile, login, logout, isInClient } = useLiff()
 
   return (
     <main>
@@ -26,6 +26,7 @@ function App(): ReactElement {
               isLoggedIn={isLoggedIn}
               error={error}
               profile={profile}
+              logout={logout}
             />
           }
         />

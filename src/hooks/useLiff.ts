@@ -74,6 +74,8 @@ export const useLiff = () => {
         navigate('/profile')
       }
 
+      console.warn(profile)
+
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
 
@@ -122,7 +124,6 @@ export const useLiff = () => {
   // マウント時に一度だけ初期化を実行
   useEffect(() => {
     initLiff()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   /**
@@ -132,9 +133,27 @@ export const useLiff = () => {
     liff.login({ redirectUri: `${window.location.origin}/profile` })
   }, [])
 
+  /**
+   * ログアウト処理を実行し、ホーム画面へ遷移させる
+   */
+  const logout = useCallback(() => {
+    if (liff.isLoggedIn()) {
+      liff.logout()
+      setLiffState({
+        isInit: true,
+        isLoggedIn: false,
+        error: null,
+        profile: null,
+        accessToken: null,
+      })
+      navigate('/')
+    }
+  }, [navigate])
+
   return {
     ...liffState,
     login,
+    logout,
     isInClient,
   }
 }
