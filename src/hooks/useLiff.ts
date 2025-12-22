@@ -62,6 +62,13 @@ export const useLiff = () => {
 
           } catch (e) {
 
+            const msg = e instanceof Error ? e.message : String(e)
+
+            // token expired / revoked なら取り直す
+            if (msg.includes('access token') && msg.includes('expired')) {
+              try { liff.logout() } catch { }
+            }
+
             // 初期化
             setLiffState({
               isInit: true,
