@@ -59,16 +59,8 @@ export const useLiff = () => {
               // TODO: プロフィールページに遷移する処理
             })
           } catch (e) {
-            console.error('Failed to get profile:', e)
 
-            // LINE内Webviewの場合、トークンの問題が疑われるため再ログインを試みる
-            if (liff.isInClient()) {
-              console.warn('In client but failed to get profile, logging in again...')
-              liff.login()
-              return
-            }
-
-            // 外部ブラウザの場合は未ログインとして扱う
+            // 初期化
             setLiffState({
               isInit: true,
               isLoggedIn: false,
@@ -78,12 +70,6 @@ export const useLiff = () => {
             })
           }
         } else {
-          // LINE内Webviewの場合、自動的にログイン処理を行う
-          if (liff.isInClient()) {
-            liff.login()
-            return
-          }
-
           // 未ログインの場合、初期化のみ完了
           setLiffState({
             isInit: true,
