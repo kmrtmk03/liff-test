@@ -59,13 +59,7 @@ export const useLiff = () => {
               // TODO: プロフィールページに遷移する処理
             })
           } catch (e) {
-            // トークンが期限切れの場合、再ログインを試みる
-            if (e instanceof Error && e.message.includes('access token expired')) {
-              console.warn('Access token expired, logging in again...')
-              liff.login()
-              return
-            }
-            throw e
+            console.error('Failed to get profile:', e)
           }
         } else {
           // LINE内Webviewの場合、自動的にログイン処理を行う
