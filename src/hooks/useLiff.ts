@@ -130,7 +130,7 @@ export const useLiff = () => {
    * ログイン処理を実行し、ログイン後にプロフィールページへ遷移させる
    */
   const login = useCallback(() => {
-    liff.login({ redirectUri: `${window.location.origin}/profile` })
+    liff.login({ redirectUri: `https://liff.line.me/2008731406-k7SGqB1P` })
   }, [])
 
   /**
