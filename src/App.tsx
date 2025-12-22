@@ -13,9 +13,6 @@ function App(): ReactElement {
     <main>
       <p>isInClient: {isInClient.toString()}</p>
       <p>isLoggedIn: {isLoggedIn.toString()}</p>
-      <p>isInit: {isInit.toString()}</p>
-      <p>error: {error}</p>
-      <p>profile: {JSON.stringify(profile)}</p>
       <Routes>
         <Route
           path="/"
