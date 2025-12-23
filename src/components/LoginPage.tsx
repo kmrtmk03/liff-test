@@ -1,4 +1,5 @@
-import type { ReactElement } from 'react'
+import { useEffect, type ReactElement } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface LoginPageProps {
   isInit: boolean
@@ -9,7 +10,21 @@ interface LoginPageProps {
 }
 
 export function LoginPage({ isInit, error, login, isLoggedIn, isInClient }: LoginPageProps): ReactElement {
+  const navigate = useNavigate()
+
+  // 初期化完了後、ログイン済みならプロフィールページにリダイレクト
+  useEffect(() => {
+    if (isInit && isLoggedIn) {
+      navigate('/profile')
+    }
+  }, [isInit, isLoggedIn, navigate])
+
   if (!isInit) return <p>Loading...</p>
+
+  // ログイン済みの場合はリダイレクト中の表示
+  if (isLoggedIn) {
+    return <p>リダイレクト中...</p>
+  }
 
   return (
     <div className="login">
