@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useLiff } from './hooks/useLiff'
 import { HomePage } from './components/HomePage'
 import { ProfilePage } from './components/ProfilePage'
+import { LoginPage } from './components/LoginPage'
 
 function App(): ReactElement {
   // profileをApp.tsxで一元管理
@@ -11,12 +12,14 @@ function App(): ReactElement {
 
   return (
     <main>
-      <p>isInClient: {isInClient.toString()}</p>
-      <p>isLoggedIn: {isLoggedIn.toString()}</p>
       <Routes>
         <Route
           path="/"
-          element={<HomePage isInit={isInit} error={error} login={login} />}
+          element={<HomePage isInit={isInit} error={error} />}
+        />
+        <Route
+          path="/login"
+          element={<LoginPage isInit={isInit} error={error} login={login} isLoggedIn={isLoggedIn} isInClient={isInClient} />}
         />
         <Route
           path="/profile"
