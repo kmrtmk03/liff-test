@@ -1,16 +1,9 @@
 import type { ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { LiffState } from '../hooks/useLiff'
+import { useLiffContext } from '../hooks/useLiffContext'
 
-interface ProfilePageProps {
-  isInit: boolean
-  isLoggedIn: boolean
-  error: string | null
-  profile: LiffState['profile']
-  logout: () => void
-}
-
-export function ProfilePage({ isInit, isLoggedIn, error, profile, logout }: ProfilePageProps): ReactElement {
+export function ProfilePage(): ReactElement {
+  const { isInit, isLoggedIn, error, profile, logout } = useLiffContext()
   const navigate = useNavigate()
 
   // ログアウト処理後に/loginへ遷移

@@ -1,15 +1,9 @@
 import { useEffect, type ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLiffContext } from '../hooks/useLiffContext'
 
-interface LoginPageProps {
-  isInit: boolean
-  error: string | null
-  login: () => void
-  isLoggedIn: boolean
-  isInClient: boolean
-}
-
-export function LoginPage({ isInit, error, login, isLoggedIn, isInClient }: LoginPageProps): ReactElement {
+export function LoginPage(): ReactElement {
+  const { isInit, error, login, isLoggedIn, isInClient } = useLiffContext()
   const navigate = useNavigate()
 
   // 初期化完了後、ログイン済みならプロフィールページにリダイレクト

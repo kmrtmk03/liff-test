@@ -1,38 +1,23 @@
 import './App.sass'
 import type { ReactElement } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { useLiff } from './hooks/useLiff'
 import { HomePage } from './components/HomePage'
 import { ProfilePage } from './components/ProfilePage'
 import { LoginPage } from './components/LoginPage'
+import { LiffLayout } from './layouts/LiffLayout'
 
 function App(): ReactElement {
-  // profileをApp.tsxで一元管理
-  const { isInit, isLoggedIn, error, profile, login, logout, isInClient } = useLiff()
-
   return (
     <main>
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage isInit={isInit} error={error} />}
-        />
-        <Route
-          path="/login"
-          element={<LoginPage isInit={isInit} error={error} login={login} isLoggedIn={isLoggedIn} isInClient={isInClient} />}
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProfilePage
-              isInit={isInit}
-              isLoggedIn={isLoggedIn}
-              error={error}
-              profile={profile}
-              logout={logout}
-            />
-          }
-        />
+        {/* トップページはLIFFに依存しない */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* LIFFが必要なルートをLiffLayoutでラップ */}
+        <Route element={<LiffLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
       </Routes>
     </main>
   )
