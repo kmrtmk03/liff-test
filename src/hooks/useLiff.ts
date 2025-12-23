@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import liff from '@line/liff'
 
 /**
@@ -37,7 +37,6 @@ export const useLiff = () => {
   })
 
   const navigate = useNavigate()
-  const location = useLocation()
 
   // LINEアプリ内（LIFFブラウザ）で動作しているかどうか
   const [isInClient, setIsInClient] = useState(false)
@@ -69,13 +68,7 @@ export const useLiff = () => {
         },
       })
 
-      // ルートパスにいる場合はプロフィールページへ遷移
-      if (location.pathname === '/') {
-        navigate('/profile')
-      }
-
       console.warn(profile)
-
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
 
