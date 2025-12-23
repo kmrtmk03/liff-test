@@ -5,6 +5,8 @@ interface HomePageProps {
   error: string | null
 }
 
+
+
 export function HomePage({ isInit, error }: HomePageProps): ReactElement {
   if (!isInit) return <p>Loading...</p>
 
